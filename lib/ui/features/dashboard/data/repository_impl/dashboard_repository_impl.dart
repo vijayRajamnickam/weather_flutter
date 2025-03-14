@@ -11,15 +11,19 @@ class DashboardRepositoryImpl implements DashboardRepository {
 
   final DashboardDataSource _datasource;
 
-
   @override
-  Future<Either<Failure, WeatherDataModel>> getDatingSubscription(double latitude, double longitude) async {
+  Future<Either<Failure, WeatherDataModel>> getDatingSubscription(
+    double latitude,
+    double longitude,
+  ) async {
     return await _datasource.getDatingSubscription(latitude, longitude);
   }
 
-  Future<Either<Failure, WeatherModel>> getWeatherModel(double latitude, double longitude) async {
+  @override
+  Future<Either<Failure, WeatherModel>> getWeatherModel(
+    double latitude,
+    double longitude,
+  ) async {
     return await _datasource.getWeatherModel(latitude, longitude);
   }
-
-
 }

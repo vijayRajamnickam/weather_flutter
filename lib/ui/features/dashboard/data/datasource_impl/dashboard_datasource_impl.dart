@@ -1,8 +1,6 @@
 import 'package:Weather/core/network/extension.dart';
 import 'package:Weather/ui/features/dashboard/data/model/weather_data_model.dart';
 import 'package:dio/dio.dart';
-
-import '../../../../../core/constants/app_urls.dart';
 import '../../../../../core/network/error.dart';
 import '../../../../../core/utils/either.dart';
 import '../datasource/dashboard_datasource.dart';
@@ -13,7 +11,6 @@ class DashboardDataSourceImpl implements DashboardDataSource {
 
   DashboardDataSourceImpl(this.dio);
 
-
   @override
   Future<Either<Failure, WeatherDataModel>> getDatingSubscription(
     double latitude,
@@ -22,11 +19,10 @@ class DashboardDataSourceImpl implements DashboardDataSource {
     var result = Either<Failure, WeatherDataModel>();
     try {
       String appId = "514ab3ff7d14e85851ab74e7ddabf161";
-      var rawResponse = await dio.get("https://api.openweathermap.org/data/3.0/onecall", queryParameters: {
-        "lat":latitude,
-        "lon":longitude,
-        "appid":appId,
-      });
+      var rawResponse = await dio.get(
+        "https://api.openweathermap.org/data/3.0/onecall",
+        queryParameters: {"lat": latitude, "lon": longitude, "appid": appId},
+      );
       var response = await rawResponse.getResult();
       if (response.isLeft()) {
         result.setLeft(response.getLeft());
@@ -51,11 +47,10 @@ class DashboardDataSourceImpl implements DashboardDataSource {
     var result = Either<Failure, WeatherModel>();
     try {
       String appId = "514ab3ff7d14e85851ab74e7ddabf161";
-      var rawResponse = await dio.get("https://api.openweathermap.org/data/2.5/weather", queryParameters: {
-        "lat":latitude,
-        "lon":longitude,
-        "appid":appId,
-      });
+      var rawResponse = await dio.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        queryParameters: {"lat": latitude, "lon": longitude, "appid": appId},
+      );
       var response = await rawResponse.getResult();
       if (response.isLeft()) {
         result.setLeft(response.getLeft());

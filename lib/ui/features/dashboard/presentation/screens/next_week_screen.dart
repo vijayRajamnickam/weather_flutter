@@ -1,16 +1,12 @@
 import 'package:Weather/core/constants/app_constants.dart';
-import 'package:Weather/core/utils/services/permisssion_service.dart';
 import 'package:Weather/ui/features/dashboard/data/model/weather_data_model.dart';
 import 'package:Weather/ui/features/dashboard/presentation/providers/dashboard_provider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/di/di.dart';
-import '../../data/model/weather_data.dart';
 
 class WeekScreen extends ConsumerStatefulWidget {
   const WeekScreen({super.key});
@@ -52,7 +48,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
             children: [
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.only(left: 25,right: 25),
+                padding: EdgeInsets.only(left: 25, right: 25),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
                 ),
@@ -97,9 +93,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                               padding: const EdgeInsets.all(10),
                               child: Row(
                                 children: [
-                                  SizedBox(
-                                    width:10,
-                                  ),
+                                  SizedBox(width: 10),
                                   Text(
                                     AppStrings.tomorrow,
                                     textAlign: TextAlign.start,
@@ -140,7 +134,10 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 20),
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                bottom: 20,
+                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -151,17 +148,24 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                         height: 40,
                                         child: Container(
                                           decoration: BoxDecoration(
-                                          color: AppColors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.green,
-                                              spreadRadius: 0, // No spread
-                                              blurRadius: 5, // Adjust for a softer effect
-                                              offset: Offset(0, 3), // Moves shadow only downward
+                                            color: AppColors.white,
+                                            borderRadius: BorderRadius.circular(
+                                              15,
                                             ),
-                                          ],
-                                        ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.green,
+                                                spreadRadius: 0,
+                                                // No spread
+                                                blurRadius: 5,
+                                                // Adjust for a softer effect
+                                                offset: Offset(
+                                                  0,
+                                                  3,
+                                                ), // Moves shadow only downward
+                                              ),
+                                            ],
+                                          ),
                                           child: SvgPicture.asset(
                                             AppImages.rainy,
                                             width: 22,
@@ -171,10 +175,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                       ),
                                       SizedBox(height: 5),
                                       Text(
-                                        "${_dashboardProvider
-                                            .nextSevenDays
-                                            ?.first
-                                            .rain ?? "0"} cm",
+                                        "${_dashboardProvider.nextSevenDays?.first.rain ?? "0"} cm",
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                           color: AppColors.appBlack,
@@ -193,13 +194,20 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             color: AppColors.white,
-                                            borderRadius: BorderRadius.circular(15),
+                                            borderRadius: BorderRadius.circular(
+                                              15,
+                                            ),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: AppColors.red,
-                                                spreadRadius: 0, // No spread
-                                                blurRadius: 5, // Adjust for a softer effect
-                                                offset: Offset(0, 3), // Moves shadow only downward
+                                                spreadRadius: 0,
+                                                // No spread
+                                                blurRadius: 5,
+                                                // Adjust for a softer effect
+                                                offset: Offset(
+                                                  0,
+                                                  3,
+                                                ), // Moves shadow only downward
                                               ),
                                             ],
                                           ),
@@ -230,13 +238,20 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             color: AppColors.white,
-                                            borderRadius: BorderRadius.circular(15),
+                                            borderRadius: BorderRadius.circular(
+                                              15,
+                                            ),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: AppColors.blue,
-                                                spreadRadius: 0, // No spread
-                                                blurRadius: 5, // Adjust for a softer effect
-                                                offset: Offset(0, 3), // Moves shadow only downward
+                                                spreadRadius: 0,
+                                                // No spread
+                                                blurRadius: 5,
+                                                // Adjust for a softer effect
+                                                offset: Offset(
+                                                  0,
+                                                  3,
+                                                ), // Moves shadow only downward
                                               ),
                                             ],
                                           ),
@@ -268,9 +283,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Flexible(
                 child: ListView.builder(
                   itemCount: _dashboardProvider.nextSixDays!.length,
@@ -297,9 +310,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
           padding: const EdgeInsets.all(15),
           child: Row(
             children: [
-              SizedBox(
-                width:10,
-              ),
+              SizedBox(width: 10),
               Text(
                 _dashboardProvider.formatDay(data.dt ?? 0),
                 textAlign: TextAlign.start,
@@ -319,9 +330,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
+              SizedBox(width: 10),
               SizedBox(
                 width: 50,
                 height: 50,

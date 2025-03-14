@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../core/constants/show_snackbar.dart';
-import '../../../../../core/utils/services/prefs.dart';
 import '../../data/model/weather_data.dart';
 import '../../data/model/weather_data_model.dart';
 
@@ -26,12 +25,11 @@ class DashboardProvider extends ChangeNotifier {
   WeatherDataModel? weekWeathers;
   WeatherModel? weather;
   List<Hourly>? hourlyData;
-  List<Hourly> todayWeather=[];
-  List<Hourly> tomorrowWeather=[];
+  List<Hourly> todayWeather = [];
+  List<Hourly> tomorrowWeather = [];
   List<Daily>? dailyData;
   List<Daily>? nextSevenDays;
   List<Daily>? nextSixDays;
-
 
   Future<bool> requestLocation() async {
     print("invoked location access");
@@ -41,7 +39,8 @@ class DashboardProvider extends ChangeNotifier {
     if (!locationPermission) {
       if (!isPermissionGranted) {
         PermissionStatus status = await Permission.locationWhenInUse.request();
-        if (status == PermissionStatus.granted || status == PermissionStatus.limited) {
+        if (status == PermissionStatus.granted ||
+            status == PermissionStatus.limited) {
           isPermissionGranted = true;
         }
       }
@@ -139,7 +138,6 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   Future<void> getWeekWeatherData(double latitude, double longitude) async {
-    // showLoader(Colors.cyan);
     try {
       var responseData = await dashboardUseCase.getWeatherData(
         latitude,
@@ -152,37 +150,39 @@ class DashboardProvider extends ChangeNotifier {
         weekWeathers = responseData.getRight();
         hourlyData = responseData.getRight().hourly;
         dailyData = responseData.getRight().daily;
-
-        if(hourlyData!.isNotEmpty){
+        if (hourlyData!.isNotEmpty) {
           DateTime now = DateTime.now();
           DateTime today = DateTime(now.year, now.month, now.day);
           DateTime tomorrow = today.add(Duration(days: 1));
-
-          todayWeather = hourlyData!.where((hour) {
-            DateTime time = DateTime.fromMillisecondsSinceEpoch(hour.dt! * 1000);
-            return time.year == today.year &&
-                time.month == today.month &&
-                time.day == today.day;
-          }).toList();
-
-          tomorrowWeather = hourlyData!.where((hour) {
-            DateTime time = DateTime.fromMillisecondsSinceEpoch(hour.dt! * 1000);
-            return time.year == tomorrow.year &&
-                time.month == tomorrow.month &&
-                time.day == tomorrow.day;
-          }).toList();
-          if(dailyData!.isNotEmpty){
+          todayWeather =
+              hourlyData!.where((hour) {
+                DateTime time = DateTime.fromMillisecondsSinceEpoch(
+                  hour.dt! * 1000,
+                );
+                return time.year == today.year &&
+                    time.month == today.month &&
+                    time.day == today.day;
+              }).toList();
+          tomorrowWeather =
+              hourlyData!.where((hour) {
+                DateTime time = DateTime.fromMillisecondsSinceEpoch(
+                  hour.dt! * 1000,
+                );
+                return time.year == tomorrow.year &&
+                    time.month == tomorrow.month &&
+                    time.day == tomorrow.day;
+              }).toList();
+          if (dailyData!.isNotEmpty) {
             if (dailyData != null && dailyData!.length > 7) {
               nextSevenDays = dailyData?.sublist(1, 8);
               nextSixDays = dailyData?.sublist(2, 8);
             }
           }
           refreshState();
-          fetchingData= false;
+          fetchingData = false;
         }
-        // showSnackBar(message: "WeatherData Fetch SuccessFully");
       }
-    }catch (e, stackTrace) {
+    } catch (e, stackTrace) {
       print("Error in getWeatherData: $e");
       print("StackTrace: $stackTrace");
       showSnackBar(message: e.toString());
@@ -197,13 +197,11 @@ class DashboardProvider extends ChangeNotifier {
   String formatTime(int timestamp) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
     DateTime now = DateTime.now();
-
     DateTime lowerBound = dateTime.subtract(Duration(minutes: 30));
     DateTime upperBound = dateTime.add(Duration(minutes: 30));
     if (now.isAfter(lowerBound) && now.isBefore(upperBound)) {
       return "Now";
     }
-
     return DateFormat('HH:mm').format(dateTime); // Example: "10:00"
   }
 

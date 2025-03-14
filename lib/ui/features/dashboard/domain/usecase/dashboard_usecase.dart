@@ -4,14 +4,13 @@ import '../../../../../core/utils/either.dart';
 import '../../data/model/weather_data.dart';
 
 abstract class DashboardUseCase {
-
   Future<Either<Failure, WeatherDataModel>> getWeatherData(
-      double latitude, double longitude
-      );
+    double latitude,
+    double longitude,
+  );
 
   Future<Either<Failure, WeatherModel>> getWeatherModel(
-      double latitude, double longitude
-      );
-
-
+    double latitude,
+    double longitude,
+  );
 }

@@ -1,5 +1,4 @@
 import 'package:Weather/ui/features/dashboard/data/model/weather_data_model.dart';
-
 import '../../../../../core/network/error.dart';
 import '../../../../../core/utils/either.dart';
 import '../../data/model/weather_data.dart';
@@ -12,12 +11,17 @@ class DashboardUseCaseImpl implements DashboardUseCase {
   final DashboardRepository _repository;
 
   @override
-  Future<Either<Failure, WeatherDataModel>> getWeatherData(double latitude, double longitude) async {
-    return await _repository.getDatingSubscription(latitude,longitude);
+  Future<Either<Failure, WeatherDataModel>> getWeatherData(
+    double latitude,
+    double longitude,
+  ) async {
+    return await _repository.getDatingSubscription(latitude, longitude);
   }
 
-  Future<Either<Failure, WeatherModel>> getWeatherModel(double latitude, double longitude) async {
-    return await _repository.getWeatherModel(latitude,longitude);
+  Future<Either<Failure, WeatherModel>> getWeatherModel(
+    double latitude,
+    double longitude,
+  ) async {
+    return await _repository.getWeatherModel(latitude, longitude);
   }
-
 }

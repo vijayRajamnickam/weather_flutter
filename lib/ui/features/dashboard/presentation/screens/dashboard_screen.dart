@@ -1,8 +1,6 @@
 import 'package:Weather/core/constants/app_constants.dart';
-import 'package:Weather/core/utils/services/permisssion_service.dart';
 import 'package:Weather/ui/features/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:Weather/ui/features/dashboard/presentation/screens/next_week_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,8 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/di/di.dart';
-import '../../../../../core/utils/services/prefs.dart';
-import '../../data/model/weather_data.dart';
 
 class DashboardWelcomeScreen extends ConsumerStatefulWidget {
   const DashboardWelcomeScreen({super.key});
@@ -28,10 +24,6 @@ class _DashboardWelcomeScreenState
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // ref.watch(dashboardProvider).getWeekWeatherData(
-      //     Prefs().getDouble(Prefs.latitude)??0.0,Prefs().getDouble(Prefs.longitude)??0.0,);
-      // ref.watch(dashboardProvider).getWeatherData(
-      //   Prefs().getDouble(Prefs.latitude)??0.0,Prefs().getDouble(Prefs.longitude)??0.0,);
       ref.watch(dashboardProvider).requestLocation();
       ref.watch(dashboardProvider).getCurrentLocation();
     });
@@ -259,30 +251,33 @@ class _DashboardWelcomeScreenState
                         weatherInfoCard(
                           icon: AppImages.rainy,
                           label: AppStrings.rainFall,
-                          value: "${_dashboardProvider.weather?.rain?.value ?? "0"} cm",
+                          value:
+                              "${_dashboardProvider.weather?.rain?.value ?? "0"} cm",
                           shadowColor: AppColors.green,
                         ),
                         weatherInfoCard(
                           icon: AppImages.wind,
                           label: AppStrings.wind,
-                          value: "${_dashboardProvider.weather?.wind?.speed?.toStringAsFixed(2) ?? "0"} km/h",
+                          value:
+                              "${_dashboardProvider.weather?.wind?.speed?.toStringAsFixed(2) ?? "0"} km/h",
                           shadowColor: AppColors.red,
                         ),
                         weatherInfoCard(
                           icon: AppImages.water,
                           label: AppStrings.humidity,
-                          value: "${_dashboardProvider.weather?.main?.humidity ?? "0"}%",
+                          value:
+                              "${_dashboardProvider.weather?.main?.humidity ?? "0"}%",
                           shadowColor: AppColors.blue,
                         ),
                         SizedBox(height: 40),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: Container(
-                           decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                               border: const Border(
                                 bottom: BorderSide(
                                   color: AppColors.grey1, // Border color
-                                  width: 1.0,         // Border thickness
+                                  width: 1.0, // Border thickness
                                 ),
                               ),
                             ),
@@ -312,7 +307,8 @@ class _DashboardWelcomeScreenState
                                         if (_dashboardProvider.isToday)
                                           Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(15),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
                                               color: AppColors.appBlack,
                                             ),
                                             width: 20,
@@ -351,10 +347,12 @@ class _DashboardWelcomeScreenState
                                           if (!_dashboardProvider.isToday)
                                             Container(
                                               width: 35,
-                                              height: 3, decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(15),
-                                              color: AppColors.appBlack,
-                                            ),
+                                              height: 3,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: AppColors.appBlack,
+                                              ),
                                             ),
                                         ],
                                       ),
@@ -558,12 +556,12 @@ class _DashboardWelcomeScreenState
     required Color shadowColor,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
       child: Material(
         borderRadius: BorderRadius.circular(15),
         color: AppColors.white1,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Row(
             children: [
               const SizedBox(width: 10),
@@ -575,7 +573,8 @@ class _DashboardWelcomeScreenState
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
-                      color: shadowColor, // No need for null check, required parameter
+                      color: shadowColor,
+                      // No need for null check, required parameter
                       blurRadius: 5,
                       offset: const Offset(0, 3),
                     ),
@@ -614,6 +613,4 @@ class _DashboardWelcomeScreenState
       ),
     );
   }
-
-
 }
