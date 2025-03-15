@@ -1,6 +1,7 @@
 import 'package:Weather/core/constants/app_constants.dart';
 import 'package:Weather/ui/features/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:Weather/ui/features/dashboard/presentation/screens/next_week_screen.dart';
+import 'package:Weather/ui/features/dashboard/presentation/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,10 +74,15 @@ class _DashboardWelcomeScreenState
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   // SizedBox(width: 20),
-                                  SvgPicture.asset(
-                                    AppImages.outlinedSearch,
-                                    width: 24,
-                                    height: 24,
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSearchScreen(),));
+                                    },
+                                    child: SvgPicture.asset(
+                                      AppImages.outlinedSearch,
+                                      width: 24,
+                                      height: 24,
+                                    ),
                                   ),
                                   Spacer(),
                                   Row(

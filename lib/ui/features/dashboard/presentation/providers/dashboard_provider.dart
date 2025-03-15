@@ -1,4 +1,5 @@
 import 'package:Weather/core/constants/app_constants.dart';
+import 'package:Weather/ui/features/dashboard/data/model/search_with_lan%20_lon.dart';
 import 'package:Weather/ui/features/dashboard/domain/usecase/dashboard_usecase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -20,6 +21,8 @@ class DashboardProvider extends ChangeNotifier {
   bool isToday = true;
   bool fetchingData = true;
 
+  bool isLoading = false;
+
   int current = 0;
   List<String> features = ["1"];
   WeatherDataModel? weekWeathers;
@@ -30,6 +33,9 @@ class DashboardProvider extends ChangeNotifier {
   List<Daily>? dailyData;
   List<Daily>? nextSevenDays;
   List<Daily>? nextSixDays;
+
+  final TextEditingController controller = TextEditingController();
+  List<SearchCityNameWithLatAndLon> suggestions = [];
 
   Future<bool> requestLocation() async {
     print("invoked location access");
@@ -138,6 +144,7 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   Future<void> getWeekWeatherData(double latitude, double longitude) async {
+    fetchingData = true;
     try {
       var responseData = await dashboardUseCase.getWeatherData(
         latitude,
@@ -203,6 +210,26 @@ class DashboardProvider extends ChangeNotifier {
       return "Now";
     }
     return DateFormat('HH:mm').format(dateTime); // Example: "10:00"
+  }
+
+  Future<void> getCityName(String city) async {
+    isLoading = true;
+    try {
+      var responseData = await dashboardUseCase.getCityName(city);
+      if (responseData.isLeft()) {
+        // showSnackBar(message:"Error Fetching City");
+        return;
+      } else {
+        isLoading = true;
+        suggestions = responseData.getRight();
+        // notifyListeners();
+      }
+      notifyListeners();
+    } catch (e, stackTrace) {
+      print("Error in getWeatherData: $e");
+      print("StackTrace: $stackTrace");
+      // showSnackBar(message: e.toString());
+    }
   }
 
   void refreshState() {

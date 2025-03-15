@@ -1,3 +1,4 @@
+import 'package:Weather/ui/features/dashboard/data/model/search_with_lan%20_lon.dart';
 import 'package:Weather/ui/features/dashboard/data/model/weather_data_model.dart';
 
 import '../../../../../core/network/error.dart';
@@ -25,5 +26,12 @@ class DashboardRepositoryImpl implements DashboardRepository {
     double longitude,
   ) async {
     return await _datasource.getWeatherModel(latitude, longitude);
+  }
+
+  @override
+  Future<Either<Failure, List<SearchCityNameWithLatAndLon>>> getCityName(
+    String city,
+  ) async {
+    return await _datasource.getCityName(city);
   }
 }

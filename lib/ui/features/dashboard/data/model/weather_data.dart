@@ -129,10 +129,10 @@ class Weather {
 }
 
 class Main {
-  final double? temp;
-  final double? feelsLike;
-  final double? tempMin;
-  final double? tempMax;
+  final dynamic? temp;
+  final dynamic? feelsLike;
+  final dynamic? tempMin;
+  final dynamic? tempMax;
   final dynamic pressure;
   final dynamic humidity;
   final dynamic seaLevel;
@@ -150,10 +150,10 @@ class Main {
   });
 
   Main.fromJson(Map<String, dynamic> json)
-    : temp = json['temp'] as double?,
-      feelsLike = json['feels_like'] as double?,
-      tempMin = json['temp_min'] as double?,
-      tempMax = json['temp_max'] as double?,
+    : temp = json['temp'] as dynamic?,
+      feelsLike = json['feels_like'] as dynamic?,
+      tempMin = json['temp_min'] as dynamic?,
+      tempMax = json['temp_max'] as dynamic?,
       pressure = json['pressure'] as dynamic,
       humidity = json['humidity'] as dynamic,
       seaLevel = json['sea_level'] as dynamic,
@@ -172,26 +172,26 @@ class Main {
 }
 
 class Wind {
-  final double? speed;
+  final dynamic? speed;
   final dynamic deg;
-  final double? gust;
+  final dynamic? gust;
 
   Wind({this.speed, this.deg, this.gust});
 
   Wind.fromJson(Map<String, dynamic> json)
-    : speed = json['speed'] as double?,
+    : speed = json['speed'] as dynamic?,
       deg = json['deg'] as dynamic,
-      gust = json['gust'] as double?;
+      gust = json['gust'] as dynamic?;
 
   Map<String, dynamic> toJson() => {'speed': speed, 'deg': deg, 'gust': gust};
 }
 
 class Rain {
-  final double? value;
+  final dynamic? value;
 
   Rain({this.value});
 
-  Rain.fromJson(Map<String, dynamic> json) : value = json['1h'] as double?;
+  Rain.fromJson(Map<String, dynamic> json) : value = json['1h'] as dynamic?;
 
   Map<String, dynamic> toJson() => {'value': value};
 }
