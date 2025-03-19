@@ -77,8 +77,8 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
       child: GooglePlaceAutoCompleteTextField(
         textEditingController: _dashboardProvider.controller,
         focusNode: addressFocusNode,
-        googleAPIKey: "AIzaSyDjbTGKXvi3cHAduI5SpsHGF9963TCGBbA",
-        // googleAPIKey: "AIzaSyB0rZHZxF5_ihk2dXKMmTR4ayiCyJKp0l0",
+        // googleAPIKey: "AIzaSyDjbTGKXvi3cHAduI5SpsHGF9963TCGBbA",
+        googleAPIKey: "AIzaSyB0rZHZxF5_ihk2dXKMmTR4ayiCyJKp0l0",
         inputDecoration: const InputDecoration(
           hintText: "Enter Address",
           border: InputBorder.none,
