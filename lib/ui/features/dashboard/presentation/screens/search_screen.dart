@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 import '../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/app_images.dart';
 import '../../../../../core/di/di.dart';
 import '../../data/model/search_with_lan _lon.dart';
 import '../providers/dashboard_provider.dart';
@@ -27,7 +31,13 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
           children: [
             AppBar(
               backgroundColor: AppColors.primary2,
-              title: const Text('Search your location'),
+              title: const Text(
+                'Search your location',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Inter",
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -42,7 +52,15 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
                       : _dashboardProvider.suggestions.isEmpty
                       ? Padding(
                         padding: const EdgeInsets.only(top: 30.0),
-                        child: Center(child: Text("City Not Found")),
+                        child: Center(
+                          child: Text(
+                            "City Not Found",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Inter",
+                            ),
+                          ),
+                        ),
                       )
                       : SizedBox(),
                 ],
@@ -56,43 +74,63 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
 
   Widget placesAutoCompleteTextField() {
     return Material(
-      borderRadius: BorderRadius.circular(6.0),
-      child: Autocomplete<String>(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          if (textEditingValue.text.isEmpty) {
-            return const Iterable<String>.empty();
-          }
+      child: GooglePlaceAutoCompleteTextField(
+        textEditingController: _dashboardProvider.controller,
+        focusNode: addressFocusNode,
+        googleAPIKey: "AIzaSyDjbTGKXvi3cHAduI5SpsHGF9963TCGBbA",
+        // googleAPIKey: "AIzaSyB0rZHZxF5_ihk2dXKMmTR4ayiCyJKp0l0",
+        inputDecoration: const InputDecoration(
+          hintText: "Enter Address",
+          border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          filled: true,
+          fillColor: AppColors.white2,
+          hintStyle: TextStyle(
+            color: AppColors.grey2,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        boxDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6.0),
+          border: Border.all(color: AppColors.white),
+        ),
+        textStyle: TextStyle(
+          color: AppColors.grey2,
+          fontWeight: FontWeight.bold,
+        ),
+        debounceTime: 400,
+        countries: const ["in"],
 
-          return _dashboardProvider.suggestions
-              .map((city) => city.displayName ?? "")
-              .where((name) => name.isNotEmpty);
-        },
-        onSelected: (String selection) {
+        isLatLngRequired: true,
+        getPlaceDetailWithLatLng: (Prediction prediction) {
           Navigator.pop(context);
-          var selectedCity = _dashboardProvider.suggestions!.firstWhere(
-            (city) => city.displayName == selection,
-            orElse: () => SearchCityNameWithLatAndLon(),
-          );
-          if (selectedCity.lat != null && selectedCity.lon != null) {
-            double latitude = double.tryParse(selectedCity.lat!) ?? 0.0;
-            double longitude = double.tryParse(selectedCity.lon!) ?? 0.0;
-            _dashboardProvider.getWeatherData(latitude, longitude);
-            _dashboardProvider.getWeekWeatherData(latitude, longitude);
-          }
+          _dashboardProvider.controller.clear();
+          double latitude = double.tryParse(prediction.lat!) ?? 0.0;
+          double longitude = double.tryParse(prediction.lng!) ?? 0.0;
+          _dashboardProvider.getWeatherData(latitude, longitude);
+          _dashboardProvider.getWeekWeatherData(latitude, longitude);
         },
-        fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
-          return TextField(
-            controller: controller,
-            focusNode: focusNode,
-            decoration: InputDecoration(
-              labelText: "Enter City Name",
-              border: OutlineInputBorder(),
+        itemClick: (Prediction prediction) {
+          print(
+            "212121 itemClick ${prediction.description} ${prediction.lat} ${prediction.lng}",
+          );
+        },
+        seperatedBuilder: Divider(),
+        itemBuilder: (context, index, Prediction prediction) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 2),
+                Expanded(child: Text(prediction.description ?? "")),
+              ],
             ),
-            onChanged: (value) {
-              _dashboardProvider.getCityName(value);
-            },
           );
         },
+        isCrossBtnShown: true,
+        // default 600 ms ,
       ),
     );
   }

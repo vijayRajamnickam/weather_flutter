@@ -75,8 +75,15 @@ class _DashboardWelcomeScreenState
                                 children: [
                                   // SizedBox(width: 20),
                                   InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSearchScreen(),));
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  AddressSearchScreen(),
+                                        ),
+                                      );
                                     },
                                     child: SvgPicture.asset(
                                       AppImages.outlinedSearch,
@@ -151,6 +158,7 @@ class _DashboardWelcomeScreenState
                                     color: AppColors.appBlack,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 30,
+                                    fontFamily: "Inter",
                                   ),
                                 ),
                               ),
@@ -166,6 +174,7 @@ class _DashboardWelcomeScreenState
                                     color: AppColors.grey,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
+                                    fontFamily: "Inter",
                                   ),
                                 ),
                               ),
@@ -200,7 +209,7 @@ class _DashboardWelcomeScreenState
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          SizedBox(height: 20),
+                                          SizedBox(height: 15),
                                           Text(
                                             _dashboardProvider
                                                     .celsiusTempAsString(
@@ -214,36 +223,41 @@ class _DashboardWelcomeScreenState
                                             style: TextStyle(
                                               color: AppColors.appBlack1,
                                               fontWeight: FontWeight.w700,
-                                              fontSize: 43,
-                                            ),
-                                          ),
-                                          Text(
-                                            _dashboardProvider
-                                                    .weather
-                                                    ?.weather
-                                                    ?.first
-                                                    .main
-                                                    .toString() ??
-                                                "",
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              color: AppColors.grey,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
+                                              fontSize: 50,
+                                              fontFamily: "Inter",
                                             ),
                                           ),
                                         ],
                                       ),
                                       Positioned(
-                                        top: 15,
-                                        right: -10,
+                                        bottom: -15,
+                                        child: Text(
+                                          _dashboardProvider
+                                                  .weather
+                                                  ?.weather
+                                                  ?.first
+                                                  .main
+                                                  .toString() ??
+                                              "",
+                                          style: const TextStyle(
+                                            color: AppColors.grey,
+                                            fontFamily: "Inter",
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 10,
+                                        right: -15,
                                         child: Text(
                                           "°C",
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             color: AppColors.grey,
+                                            fontFamily: "Inter",
                                             fontWeight: FontWeight.w400,
-                                            fontSize: 14,
+                                            fontSize: 20,
                                           ),
                                         ),
                                       ),
@@ -301,6 +315,7 @@ class _DashboardWelcomeScreenState
                                         Text(
                                           AppStrings.today,
                                           style: TextStyle(
+                                            fontFamily: "Inter",
                                             fontWeight: FontWeight.w700,
                                             fontSize: 16,
                                             color:
@@ -341,6 +356,7 @@ class _DashboardWelcomeScreenState
                                           Text(
                                             AppStrings.tomorrow,
                                             style: TextStyle(
+                                              fontFamily: "Inter",
                                               fontWeight: FontWeight.w700,
                                               fontSize: 16,
                                               color:
@@ -382,6 +398,7 @@ class _DashboardWelcomeScreenState
                                           AppStrings.next7Days,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
+                                            fontFamily: "Inter",
                                             fontSize: 16,
                                             color: AppColors.grey1,
                                           ),
@@ -442,6 +459,7 @@ class _DashboardWelcomeScreenState
                                                   weather.dt ?? 0,
                                                 ),
                                                 style: const TextStyle(
+                                                  fontFamily: "Inter",
                                                   color: AppColors.grey2,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -461,6 +479,7 @@ class _DashboardWelcomeScreenState
                                               Text(
                                                 "${_dashboardProvider.celsiusTempAsString(weather.temp)}°C",
                                                 style: const TextStyle(
+                                                  fontFamily: "Inter",
                                                   fontSize: 16,
                                                 ),
                                               ),
@@ -516,6 +535,7 @@ class _DashboardWelcomeScreenState
                                                 ),
                                                 style: const TextStyle(
                                                   color: AppColors.grey2,
+                                                  fontFamily: "Inter",
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -534,6 +554,7 @@ class _DashboardWelcomeScreenState
                                               Text(
                                                 "${_dashboardProvider.celsiusTempAsString(weather.temp)}°C",
                                                 style: const TextStyle(
+                                                  fontFamily: "Inter",
                                                   fontSize: 16,
                                                 ),
                                               ),
@@ -596,6 +617,7 @@ class _DashboardWelcomeScreenState
                   style: const TextStyle(
                     color: AppColors.grey,
                     fontWeight: FontWeight.w400,
+                    fontFamily: "Inter",
                     fontSize: 14,
                   ),
                 ),
@@ -608,6 +630,7 @@ class _DashboardWelcomeScreenState
                 style: const TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.w400,
+                  fontFamily: "Inter",
                   fontSize: 14,
                 ),
               ),

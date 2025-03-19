@@ -78,7 +78,7 @@ class DashboardDataSourceImpl implements DashboardDataSource {
         queryParameters: {
           "q": city,
           "format": "json",
-          "countrycodes": "in",
+          // "countrycodes": "in",
         },
         options: Options(
           headers: {

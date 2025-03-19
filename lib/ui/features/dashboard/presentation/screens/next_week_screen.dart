@@ -73,6 +73,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: AppColors.appBlack,
+                            fontFamily: "Inter",
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
                           ),
@@ -99,6 +100,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       color: AppColors.appBlack,
+                                      fontFamily: "Inter",
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20,
                                     ),
@@ -109,6 +111,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       color: AppColors.appBlack1,
+                                      fontFamily: "Inter",
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
                                     ),
@@ -178,6 +181,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                         "${_dashboardProvider.nextSevenDays?.first.rain ?? "0"} cm",
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
+                                          fontFamily: "Inter",
                                           color: AppColors.appBlack,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
@@ -225,6 +229,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                           color: AppColors.appBlack,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
+                                          fontFamily: "Inter",
                                         ),
                                       ),
                                     ],
@@ -267,6 +272,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                           color: AppColors.appBlack,
+                                          fontFamily: "Inter",
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
                                         ),
@@ -317,6 +323,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                 style: TextStyle(
                   color: AppColors.appBlack,
                   fontWeight: FontWeight.w500,
+                  fontFamily: "Inter",
                   fontSize: 20,
                 ),
               ),
@@ -327,6 +334,7 @@ class _WeekScreenState extends ConsumerState<WeekScreen> {
                 style: TextStyle(
                   color: AppColors.appBlack1,
                   fontWeight: FontWeight.w700,
+                  fontFamily: "Inter",
                   fontSize: 18,
                 ),
               ),

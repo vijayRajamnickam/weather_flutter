@@ -220,7 +220,7 @@ class DashboardProvider extends ChangeNotifier {
         // showSnackBar(message:"Error Fetching City");
         return;
       } else {
-        isLoading = true;
+        isLoading = false;
         suggestions = responseData.getRight();
         // notifyListeners();
       }
