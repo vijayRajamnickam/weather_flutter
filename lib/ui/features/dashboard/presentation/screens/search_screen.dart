@@ -77,7 +77,6 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
       child: GooglePlaceAutoCompleteTextField(
         textEditingController: _dashboardProvider.controller,
         focusNode: addressFocusNode,
-
         inputDecoration: const InputDecoration(
           hintText: "Enter Address",
           border: InputBorder.none,
@@ -99,7 +98,6 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
           fontWeight: FontWeight.bold,
         ),
         debounceTime: 400,
-        countries: const ["in"],
 
         isLatLngRequired: true,
         getPlaceDetailWithLatLng: (Prediction prediction) {
